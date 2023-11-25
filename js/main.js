@@ -1,6 +1,11 @@
-let gpuHashrate = Number(prompt('Cantidad de mh/s')); // Hashrate de la GPU en MH/s
-let gpuConsumo = Number(prompt('Consumo de la GPU en Watts')); // Consumo de la GPU en Watts
-let costoKWh = Number(prompt('Costo del KWh')); // Costo por kWh en dólares
+let continuar = true;
+// ciclo para seguir realizando calculos
+while (continuar) {
+
+// estableciendo variables    
+let gpuHashrate = Number(prompt('Cantidad de mh/s')); 
+let gpuConsumo = Number(prompt('Consumo de la GPU en Watts'));
+let costoKWh = Number(prompt('Costo del KWh')); 
 
 console.log( '---------------------Datos del rig---------------------');
 console.log( 'Mh/s ' + gpuHashrate, 'Consumo ' + gpuConsumo + 'W', 'U$D ' + costoKWh);
@@ -11,8 +16,8 @@ let xnaRecompensaBlock = 16176;
 let xnaHashred = 5510000;
 let xnaNblocksxh = 1464;
 // randomizo el precio para que vayan cambiando los resultados.
-let xmin = 0.005;
-let xmax = 0.2
+let xmin = 0.004;
+let xmax = 0.1
 let xnaPrecio = Math.random() * (xmax - xmin) + xmin;
 
 let algo2 = 'RVN'; 
@@ -20,8 +25,8 @@ let rvnDificultad = 69776;
 let rvnRecompensaBlock = 2500;
 let rvnHashred = 5290000;
 let rvnNblocksxh = 1440;
-let rmin = 0.005;
-let rmax = 0.2
+let rmin = 0.01;
+let rmax = 0.4
 let rvnPrecio = Math.random() * (rmax - rmin) + rmin;
 
 console.log( '---------------------Cotizacion---------------------');
@@ -47,23 +52,22 @@ console.log( 'u$d Diarios ' + gananciaRvn + ' RVN/USDT')
 
 
 console.log( '---------------------Conclusion---------------------');
-while ( (gananciaRvn > 0) || (gananciaXna > 0)) {
+// con que alguna de ganancia, calcula que minar
+if ( (gananciaRvn > 0) || (gananciaXna > 0)) {
     console.log ( 'Prende los rigs!!!');
 if (gananciaRvn > gananciaXna) {
     console.log ('Mina RVN')
-    break
 } else {
     console.log ('Mina XNA')
-    break
 }
 }
-
-while ( (gananciaRvn < 0) && (gananciaXna < 0)) {
+// si ambas dan perdida recomienda apagar
+if ( (gananciaRvn < 0) && (gananciaXna < 0)) {
     console.log ( 'Apaga los rigs!!!');
-    break
 }
 
 console.log( '--------------------Proyeccion de Ganancias--------------------');
+// de la recomendacion te hace el calculo en tiempo
 if  ( (gananciaRvn > 0) || (gananciaXna > 0)) {
     if (gananciaRvn > gananciaXna) {
     console.log ( 'Diario ' + gananciaRvn * 1 + ' u$d','Semanal ' + gananciaRvn * 7 + ' u$d', 'Mensual ' + gananciaRvn * 31 + ' u$d' )
@@ -73,3 +77,8 @@ if  ( (gananciaRvn > 0) || (gananciaXna > 0)) {
 } else {
     console.log("Agarra la pala")
 }
+// para realizar otro calculo
+continuar = confirm("¿Deseas realizar otro calculo?");
+}
+
+console.log("Gracias por usar el programa de calculo de mineria.");
