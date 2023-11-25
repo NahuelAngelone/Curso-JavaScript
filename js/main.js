@@ -10,7 +10,7 @@ let continuar = true;
 // ciclo para seguir realizando calculos
 while (continuar) {
 
-    // Llamo a la funsion
+    // Llamo a la function
     let { gpuHashrate, gpuConsumo, costoKWh } = solicitarDatos();
 
 
