@@ -10,14 +10,22 @@ let xnaDificultad = 72759;
 let xnaRecompensaBlock = 16176;
 let xnaHashred = 5510000;
 let xnaNblocksxh = 1464;
-let xnaPrecio = 0.004843;
+// randomizo el precio para que vayan cambiando los resultados.
+let xmin = 0.005;
+let xmax = 0.2
+let xnaPrecio = Math.random() * (xmax - xmin) + xmin;
 
 let algo2 = 'RVN'; 
 let rvnDificultad = 69776;
 let rvnRecompensaBlock = 2500;
 let rvnHashred = 5290000;
 let rvnNblocksxh = 1440;
-let rvnPrecio = 0.018;
+let rmin = 0.005;
+let rmax = 0.2
+let rvnPrecio = Math.random() * (rmax - rmin) + rmin;
+
+console.log( '---------------------Cotizacion---------------------');
+console.log( rvnPrecio + ' RVN/USDT', xnaPrecio + ' XNA/USDT');
 
 console.log( '---------------------Hay que pagar la luz---------------------');
 const costoEnergia = (gpuConsumo / 1000) * costoKWh * 24
@@ -53,4 +61,15 @@ if (gananciaRvn > gananciaXna) {
 while ( (gananciaRvn < 0) && (gananciaXna < 0)) {
     console.log ( 'Apaga los rigs!!!');
     break
+}
+
+console.log( '--------------------Proyeccion de Ganancias--------------------');
+if  ( (gananciaRvn > 0) || (gananciaXna > 0)) {
+    if (gananciaRvn > gananciaXna) {
+    console.log ( 'Diario ' + gananciaRvn * 1 + ' u$d','Semanal ' + gananciaRvn * 7 + ' u$d', 'Mensual ' + gananciaRvn * 31 + ' u$d' )
+} else {
+    console.log ( 'Diario ' + gananciaXna * 1  + ' u$d','Semanal ' + gananciaXna * 7 + ' u$d', 'Mensual ' + gananciaXna * 31 + ' u$d')
+}
+} else {
+    console.log("Agarra la pala")
 }
