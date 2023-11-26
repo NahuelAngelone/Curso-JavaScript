@@ -1,11 +1,17 @@
 // estableciendo variables    
 function solicitarDatos() {
-    let gpuHashrate = Number(prompt('Cantidad de mh/s')); 
+    let gpuHashrate = Number(prompt('Cantidad de mh/s'));
+    while (Number.isNaN(gpuHashrate))
+        gpuHashrate = Number(prompt('Valor incorrecto, pone un numero correspondiente a tu Mh/s'));
     let gpuConsumo = Number(prompt('Consumo de la GPU en Watts')); 
-    let costoKWh = Number(prompt('Costo del KWh')); 
+    while (Number.isNaN(gpuConsumo)) 
+        gpuConsumo = Number(prompt('Valor incorrecto, pone un numero correspondiente a tu consumo en watts'))
+    let costoKWh = Number(prompt('Costo del KWh'));
+    while (Number.isNaN(costoKWh)) 
+        costoKWh = Number(prompt('Valor incorrecto, pone un numero correspondiente al precio del Kwh'));       
     return { gpuHashrate, gpuConsumo, costoKWh };
-} 
-
+}
+ 
 let continuar = true;
 // ciclo para seguir realizando calculos
 while (continuar) {
