@@ -1,13 +1,13 @@
-// estableciendo variables    
+// estableciendo variables condicionando numeros y positividad  
 function solicitarDatos() {
     let gpuHashrate = Number(prompt('Cantidad de mh/s'));
-    while (Number.isNaN(gpuHashrate))
+    while (Number.isNaN(gpuHashrate) || (gpuHashrate <= 0))
         gpuHashrate = Number(prompt('Valor incorrecto, pone un numero correspondiente a tu Mh/s'));
     let gpuConsumo = Number(prompt('Consumo de la GPU en Watts')); 
-    while (Number.isNaN(gpuConsumo)) 
+    while (Number.isNaN(gpuConsumo) || (gpuConsumo <= 0)) 
         gpuConsumo = Number(prompt('Valor incorrecto, pone un numero correspondiente a tu consumo en watts'))
     let costoKWh = Number(prompt('Costo del KWh'));
-    while (Number.isNaN(costoKWh)) 
+    while (Number.isNaN(costoKWh) || (costoKWh < 0)) 
         costoKWh = Number(prompt('Valor incorrecto, pone un numero correspondiente al precio del Kwh'));       
     return { gpuHashrate, gpuConsumo, costoKWh };
 }
