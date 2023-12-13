@@ -11,7 +11,7 @@ function solicitarDatos() {
         costoKWh = Number(prompt('Valor incorrecto, pone un numero correspondiente al precio del Kwh'));       
     return { gpuHashrate, gpuConsumo, costoKWh };
 }
- 
+
 let continuar = true;
 // ciclo para seguir realizando calculos
 while (continuar) {
@@ -19,7 +19,8 @@ while (continuar) {
     // Llamo a la function
     let { gpuHashrate, gpuConsumo, costoKWh } = solicitarDatos();
 
-
+    console.log ( 'Por el momento solo soportamos ' + algoritmos.map(algo => algo.nombre).join("/"))
+    console.log(algoritmosFiltrados);
     console.log( '---------------------Datos del rig---------------------');
     console.log( 'Mh/s ' + gpuHashrate, 'Consumo ' + gpuConsumo + 'W', 'U$D ' + costoKWh);
 
@@ -31,10 +32,10 @@ while (continuar) {
     console.log( 'Costo de luz ' + costoEnergia + ' u$d');
 
     console.log( '---------------------Crypto Diaria---------------------');
-    const recompensaXna = (gpuHashrate / algo1.xnaHashred) * algo1.xnaRecompensaBlock * algo1.xnaNblocksxh
+    const recompensaXna = (gpuHashrate / algo1.hashred) * algo1.recompensaBlock * algo1.nblocksxh
     console.log(recompensaXna + ' XNA');
 
-    const recompensaRvn = (gpuHashrate / algo2.rvnHashred) * algo2.rvnRecompensaBlock * algo2.rvnNblocksxh
+    const recompensaRvn = (gpuHashrate / algo2.hashred) * algo2.recompensaBlock * algo2.nblocksxh
     console.log(recompensaRvn + ' RVN');
 
     console.log( '---------------------Ganancia diaria---------------------');
