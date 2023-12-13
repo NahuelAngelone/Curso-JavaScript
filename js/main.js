@@ -28,21 +28,28 @@ while (continuar) {
     console.log( algo2.rvnPrecio + ' RVN/USDT', algo1.xnaPrecio + ' XNA/USDT');
 
     console.log( '---------------------Hay que pagar la luz---------------------');
-    const costoEnergia = (gpuConsumo / 1000) * costoKWh * 24
-    console.log( 'Costo de luz ' + costoEnergia + ' u$d');
+    
+    function costoEnergia(gpuConsumo, costoKWh) {
+        return (gpuConsumo / 1000) * costoKWh * 24;
+    }
+    console.log( 'Costo de luz ' + costoEnergia(gpuConsumo, costoKWh) + ' u$d');
 
     console.log( '---------------------Crypto Diaria---------------------');
-    const recompensaXna = (gpuHashrate / algo1.hashred) * algo1.recompensaBlock * algo1.nblocksxh
-    console.log(recompensaXna + ' XNA');
+    function recompensaXna (gpuHashrate, algo1) {
+        return (gpuHashrate / algo1.hashred) * algo1.recompensaBlock * algo1.nblocksxh
+    }
+    console.log(recompensaXna (gpuHashrate, algo1) + ' XNA');
 
-    const recompensaRvn = (gpuHashrate / algo2.hashred) * algo2.recompensaBlock * algo2.nblocksxh
-    console.log(recompensaRvn + ' RVN');
+    function recompensaRvn (gpuHashrate, algo2) {
+        return (gpuHashrate / algo2.hashred) * algo2.recompensaBlock * algo2.nblocksxh
+    }
+    console.log(recompensaRvn (gpuHashrate, algo2) + ' RVN');
 
     console.log( '---------------------Ganancia diaria---------------------');
-    const gananciaXna  = recompensaXna * algo1.xnaPrecio - costoEnergia
+    const gananciaXna  = recompensaXna (gpuHashrate, algo1) * algo1.xnaPrecio - costoEnergia (gpuConsumo, costoKWh)
     console.log('u$d Diarios ' + gananciaXna + ' XNA/USDT')
 
-    const gananciaRvn  = recompensaRvn * algo2.rvnPrecio - costoEnergia
+    const gananciaRvn  = recompensaRvn (gpuHashrate, algo2) * algo2.rvnPrecio - costoEnergia (gpuConsumo, costoKWh)
     console.log( 'u$d Diarios ' + gananciaRvn + ' RVN/USDT')
 
 
