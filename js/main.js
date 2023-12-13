@@ -19,7 +19,7 @@ while (continuar) {
     // Llamo a la function
     let { gpuHashrate, gpuConsumo, costoKWh } = solicitarDatos();
 
-    console.log ( 'Por el momento solo soportamos ' + algoritmos.map(algo => algo.nombre).join("/"))
+    console.log ( 'Por el momento solo soportamos ' + algoritmos.map(algo => algo.nombre).join("/") + ' - NEOX proximamente')
     console.log(algoritmosFiltrados);
     console.log( '---------------------Datos del rig---------------------');
     console.log( 'Mh/s ' + gpuHashrate, 'Consumo ' + gpuConsumo + 'W', 'U$D ' + costoKWh);
