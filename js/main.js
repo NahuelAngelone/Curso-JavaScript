@@ -1,4 +1,4 @@
-// estableciendo variables condicionando numeros y positividad  
+// estableciendo variables condicionando numeros y no negatividad  
 function solicitarDatos() {
     let gpuHashrate = Number(prompt('Cantidad de mh/s'));
     while (Number.isNaN(gpuHashrate) || (gpuHashrate <= 0))
@@ -23,44 +23,47 @@ while (continuar) {
     console.log( '---------------------Datos del rig---------------------');
     console.log( 'Mh/s ' + gpuHashrate, 'Consumo ' + gpuConsumo + 'W', 'U$D ' + costoKWh);
 
-    let algo1 = 'XNA';
-    let xnaDificultad = 72759; 
-    let xnaRecompensaBlock = 16176;
-    let xnaHashred = 5510000;
-    let xnaNblocksxh = 1464;
-    // randomizo el precio para que vayan cambiando los resultados.
-    let xmin = 0.004;
-    let xmax = 0.1
-    let xnaPrecio = Math.random() * (xmax - xmin) + xmin;
+    const algo1 = {
+        nombre: 'XNA',
+        xnaDificultad: 72759,
+        xnaRecompensaBlock: 16176,
+        xnaHashred: 5510000,
+        xnaNblocksxh: 1464,
+        xmin: 0.004,
+        xmax: 0.1,
+    }
+    algo1.xnaPrecio= Math.random() * (algo1.xmax - algo1.xmin) + algo1.xmin;
 
-    let algo2 = 'RVN'; 
-    let rvnDificultad = 69776;
-    let rvnRecompensaBlock = 2500;
-    let rvnHashred = 5290000;
-    let rvnNblocksxh = 1440;
-    let rmin = 0.01;
-    let rmax = 0.4
-    let rvnPrecio = Math.random() * (rmax - rmin) + rmin;
+    const algo2 = {
+        nombre: 'RVN',
+        rvnDificultad: 69776,
+        rvnRecompensaBlock: 2500,
+        rvnHashred: 5290000,
+        rvnNblocksxh: 1440,
+        rmin: 0.01,
+        rmax: 0.4,
+    }
+    algo2.rvnPrecio= Math.random() * (algo2.rmax - algo2.rmin) + algo2.rmin;
 
     console.log( '---------------------Cotizacion---------------------');
-    console.log( rvnPrecio + ' RVN/USDT', xnaPrecio + ' XNA/USDT');
+    console.log( algo2.rvnPrecio + ' RVN/USDT', algo1.xnaPrecio + ' XNA/USDT');
 
     console.log( '---------------------Hay que pagar la luz---------------------');
     const costoEnergia = (gpuConsumo / 1000) * costoKWh * 24
     console.log( 'Costo de luz ' + costoEnergia + ' u$d');
 
     console.log( '---------------------Crypto Diaria---------------------');
-    const recompensaXna = (gpuHashrate / xnaHashred) * xnaRecompensaBlock * xnaNblocksxh
+    const recompensaXna = (gpuHashrate / algo1.xnaHashred) * algo1.xnaRecompensaBlock * algo1.xnaNblocksxh
     console.log(recompensaXna + ' XNA');
 
-    const recompensaRvn = (gpuHashrate / rvnHashred) * rvnRecompensaBlock * rvnNblocksxh
+    const recompensaRvn = (gpuHashrate / algo2.rvnHashred) * algo2.rvnRecompensaBlock * algo2.rvnNblocksxh
     console.log(recompensaRvn + ' RVN');
 
     console.log( '---------------------Ganancia diaria---------------------');
-    const gananciaXna  = recompensaXna * xnaPrecio - costoEnergia
+    const gananciaXna  = recompensaXna * algo1.xnaPrecio - costoEnergia
     console.log('u$d Diarios ' + gananciaXna + ' XNA/USDT')
 
-    const gananciaRvn  = recompensaRvn * rvnPrecio - costoEnergia
+    const gananciaRvn  = recompensaRvn * algo2.rvnPrecio - costoEnergia
     console.log( 'u$d Diarios ' + gananciaRvn + ' RVN/USDT')
 
 
