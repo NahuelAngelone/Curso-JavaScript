@@ -46,35 +46,39 @@ while (continuar) {
     console.log(recompensaRvn (gpuHashrate, algo2) + ' RVN');
 
     console.log( '---------------------Ganancia diaria---------------------');
-    const gananciaXna  = recompensaXna (gpuHashrate, algo1) * algo1.xnaPrecio - costoEnergia (gpuConsumo, costoKWh)
-    console.log('u$d Diarios ' + gananciaXna + ' XNA/USDT')
-
-    const gananciaRvn  = recompensaRvn (gpuHashrate, algo2) * algo2.rvnPrecio - costoEnergia (gpuConsumo, costoKWh)
-    console.log( 'u$d Diarios ' + gananciaRvn + ' RVN/USDT')
+    function gananciaXna () {
+        return recompensaXna (gpuHashrate,algo1) * algo1.xnaPrecio - costoEnergia (gpuConsumo, costoKWh)
+    }
+    console.log('u$d Diarios ' + gananciaXna () + ' XNA/USDT')
+    
+    function gananciaRvn () {
+        return recompensaRvn (gpuHashrate,algo2) * algo2.rvnPrecio - costoEnergia (gpuConsumo, costoKWh)
+    }
+    console.log( 'u$d Diarios ' + gananciaRvn () + ' RVN/USDT')
 
 
     console.log( '---------------------Conclusion---------------------');
     // con que alguna de ganancia, calcula que minar
-    if ( (gananciaRvn > 0) || (gananciaXna > 0)) {
+    if ( (gananciaRvn() > 0) || (gananciaXna() > 0)) {
         console.log ( 'Prende los rigs!!!');
-    if (gananciaRvn > gananciaXna) {
+    if (gananciaRvn() > gananciaXna()) {
         console.log ('Mina RVN')
     } else {
         console.log ('Mina XNA')
     }
     }
     // si ambas dan perdida recomienda apagar
-    if ( (gananciaRvn < 0) && (gananciaXna < 0)) {
+    if ( (gananciaRvn() < 0) && (gananciaXna() < 0)) {
         console.log ( 'Apaga los rigs!!!');
     }
 
     console.log( '--------------------Proyeccion de Ganancias--------------------');
     // de la recomendacion te hace el calculo en tiempo
-    if  ( (gananciaRvn > 0) || (gananciaXna > 0)) {
-        if (gananciaRvn > gananciaXna) {
-        console.log ( 'Diario ' + gananciaRvn * 1 + ' u$d','Semanal ' + gananciaRvn * 7 + ' u$d', 'Mensual ' + gananciaRvn * 31 + ' u$d' )
+    if  ( (gananciaRvn() > 0) || (gananciaXna() > 0)) {
+        if (gananciaRvn() > gananciaXna()) {
+        console.log ( 'Diario ' + gananciaRvn() * 1 + ' u$d','Semanal ' + gananciaRvn() * 7 + ' u$d', 'Mensual ' + gananciaRvn() * 31 + ' u$d' )
     } else {
-        console.log ( 'Diario ' + gananciaXna * 1  + ' u$d','Semanal ' + gananciaXna * 7 + ' u$d', 'Mensual ' + gananciaXna * 31 + ' u$d')
+        console.log ( 'Diario ' + gananciaXna() * 1  + ' u$d','Semanal ' + gananciaXna() * 7 + ' u$d', 'Mensual ' + gananciaXna() * 31 + ' u$d')
     }
     } else {
         console.log("Agarra la pala")
