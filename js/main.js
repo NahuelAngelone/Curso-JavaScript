@@ -19,13 +19,13 @@ while (continuar) {
     // Llamo a la function
     let { gpuHashrate, gpuConsumo, costoKWh } = solicitarDatos();
 
-    console.log ( 'Por el momento solo soportamos ' + algoritmos.map(algo => algo.nombre).join("/") + ' - NEOX en proceso')
+    console.log ( 'Por el momento solo soportamos ' + algoritmos.map(algo => algo.nombre).join("/"))
     console.log(algoritmosFiltrados);
     console.log( '---------------------Datos del rig---------------------');
     console.log( 'Mh/s ' + gpuHashrate, 'Consumo ' + gpuConsumo + 'W', 'U$D ' + costoKWh);
 
     console.log( '---------------------Cotizacion---------------------');
-    console.log( algo2.rvnPrecio + ' RVN/USDT', algo1.xnaPrecio + ' XNA/USDT');
+    console.log( algo2.rvnPrecio + ' RVN/USDT', algo1.xnaPrecio + ' XNA/USDT', algo3.neoxaPrecio + ' NEOXA/USDT');
 
     console.log( '---------------------Hay que pagar la luz---------------------');
     
@@ -45,6 +45,11 @@ while (continuar) {
     }
     console.log(recompensaRvn (gpuHashrate, algo2) + ' RVN');
 
+    function recompensaNeoxa (gpuHashrate, algo3) {
+        return (gpuHashrate / algo3.hashred) * algo3.recompensaBlock * algo3.nblocksxh
+    }
+    console.log(recompensaNeoxa (gpuHashrate, algo3) + ' NEOXA');
+
     console.log( '---------------------Ganancia diaria---------------------');
     function gananciaXna () {
         return recompensaXna (gpuHashrate,algo1) * algo1.xnaPrecio - costoEnergia (gpuConsumo, costoKWh)
@@ -56,32 +61,41 @@ while (continuar) {
     }
     console.log( 'u$d Diarios ' + gananciaRvn () + ' RVN/USDT')
 
+    function gananciaNeoxa () {
+        return recompensaNeoxa (gpuHashrate,algo3) * algo3.neoxaPrecio - costoEnergia (gpuConsumo, costoKWh)
+    }
+    console.log( 'u$d Diarios ' + gananciaNeoxa () + ' NEOXA/USDT')
+
 
     console.log( '---------------------Conclusion---------------------');
     // con que alguna de ganancia, calcula que minar
-    if ( (gananciaRvn() > 0) || (gananciaXna() > 0)) {
+    if ( (gananciaRvn() > 0) || (gananciaXna() > 0) || (gananciaNeoxa() > 0)) {
         console.log ( 'Prende los rigs!!!');
-    if (gananciaRvn() > gananciaXna()) {
-        console.log ('Mina RVN')
-    } else {
-        console.log ('Mina XNA')
-    }
+        if (gananciaRvn() > gananciaXna() && gananciaRvn() > gananciaNeoxa()) {
+            console.log('Mina RVN');
+        } else if (gananciaXna() > gananciaNeoxa()) {
+            console.log('Mina XNA');
+        } else {
+            console.log('Mina NEOXA');
+        }
     }
     // si ambas dan perdida recomienda apagar
-    if ( (gananciaRvn() < 0) && (gananciaXna() < 0)) {
+    if ( (gananciaRvn() < 0) && (gananciaXna() < 0) && (gananciaNeoxa() < 0)) {
         console.log ( 'Apaga los rigs!!!');
     }
 
     console.log( '--------------------Proyeccion de Ganancias--------------------');
     // de la recomendacion te hace el calculo en tiempo
-    if  ( (gananciaRvn() > 0) || (gananciaXna() > 0)) {
-        if (gananciaRvn() > gananciaXna()) {
-        console.log ( 'Diario ' + gananciaRvn() * 1 + ' u$d','Semanal ' + gananciaRvn() * 7 + ' u$d', 'Mensual ' + gananciaRvn() * 31 + ' u$d' )
+    if ((gananciaRvn() > 0) || (gananciaXna() > 0) || (gananciaNeoxa() > 0)) {
+        if (gananciaRvn() > gananciaXna() && gananciaRvn() > gananciaNeoxa()) {
+            console.log('Diario ' + gananciaRvn() * 1 + ' u$d', 'Semanal ' + gananciaRvn() * 7 + ' u$d', 'Mensual ' + gananciaRvn() * 31 + ' u$d');
+        } else if (gananciaXna() > gananciaNeoxa()) {
+            console.log('Diario ' + gananciaXna() * 1 + ' u$d', 'Semanal ' + gananciaXna() * 7 + ' u$d', 'Mensual ' + gananciaXna() * 31 + ' u$d');
+        } else {
+            console.log('Diario ' + gananciaNeoxa() * 1 + ' u$d', 'Semanal ' + gananciaNeoxa() * 7 + ' u$d', 'Mensual ' + gananciaNeoxa() * 31 + ' u$d');
+        }
     } else {
-        console.log ( 'Diario ' + gananciaXna() * 1  + ' u$d','Semanal ' + gananciaXna() * 7 + ' u$d', 'Mensual ' + gananciaXna() * 31 + ' u$d')
-    }
-    } else {
-        console.log("Agarra la pala")
+        console.log("Agarra la pala");
     }
     // para realizar otro calculo
     continuar = confirm("¿Deseas realizar otro calculo?");
