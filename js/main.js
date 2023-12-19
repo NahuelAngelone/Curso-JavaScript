@@ -16,6 +16,9 @@ let continuar = true;
 // ciclo para seguir realizando calculos
 while (continuar) {
 
+    // Actualizo precios antes de cada cálculo
+    algoritmos.forEach(algo => actualizarPrecios(algo));
+
     // Llamo a la function
     let { gpuHashrate, gpuConsumo, costoKWh } = solicitarDatos();
 
@@ -99,5 +102,14 @@ while (continuar) {
     }
     // para realizar otro calculo
     continuar = confirm("¿Deseas realizar otro calculo?");
+    
+    
+    // Función para actualizar precios
+    function actualizarPrecios(algo) {
+        algo.precio = Math.random() * (algo.max - algo.min) + algo.min;
+        algo.xnaPrecio = Math.random() * (algo.max - algo.min) + algo.min;
+        algo.rvnPrecio = Math.random() * (algo.max - algo.min) + algo.min;
+        algo.neoxaPrecio = Math.random() * (algo.max - algo.min) + algo.min;
+}
 }
 console.log("Gracias por usar el programa de calculo de mineria.");
