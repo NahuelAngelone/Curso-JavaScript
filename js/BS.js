@@ -7,11 +7,26 @@ function Algoritmo(nombre, dificultad, recompensaBlock, hashred, nblocksxh, min,
     this.nblocksxh = nblocksxh;
     this.min = min;
     this.max = max;
-    this.precio = Math.random() * (max - min) + min;
-    this.xnaPrecio = Math.random() * (this.max - this.min) + this.min;
-    this.rvnPrecio = Math.random() * (this.max - this.min) + this.min;
-    this.neoxaPrecio = Math.random() * (this.max - this.min) + this.min;
+    this.actualizarPrecios();
 }
+
+Algoritmo.prototype.actualizarPrecios = function () {
+    this.precio = Algoritmo.generarPrecio();
+    this.xnaPrecio = Algoritmo.generarPrecio();
+    this.rvnPrecio = Algoritmo.generarPrecio();
+    this.neoxaPrecio = Algoritmo.generarPrecio();
+};
+Algoritmo.actualizarPreciosGlobales = function (algoritmos) {
+    algoritmos.forEach(algo => {
+        algo.precio = Algoritmo.generarPrecio();
+        algo.xnaPrecio = Algoritmo.generarPrecio();
+        algo.rvnPrecio = Algoritmo.generarPrecio();
+        algo.neoxaPrecio = Algoritmo.generarPrecio();
+    });
+};
+Algoritmo.generarPrecio = function () {
+    return Math.random() * (this.max - this.min) + this.min;
+};
 
 // Creo objetos usando el constructor
 const algo1 = new Algoritmo('XNA', 72759, 16176, 5510000, 1464, 0.004, 0.1);
