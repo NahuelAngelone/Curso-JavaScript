@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Document</title>
+    <title>Calculadora de Minería</title>
 </head>
 <body>
+    <form id="datosMineria">
+        <label for="gpuHashrate">Cantidad de mh/s:</label>
+        <input type="number" id="gpuHashrate" name="gpuHashrate" required min="1"><br><br>
     
-    <script src="js/BS.js"></script>
-    <script src="js/main.js"></script>
+        <label for="gpuConsumo">Consumo de la GPU en Watts:</label>
+        <input type="number" id="gpuConsumo" name="gpuConsumo" required min="1"><br><br>
+    
+        <label for="costoKWh">Costo del KWh:</label>
+        <input type="number" id="costoKWh" name="costoKWh" required min="0" step="0.01"><br><br>
+    
+        <input type="submit" value="Calcular">
+    </form>
+    
+    <div id="resultados"></div>
+    
+    <script src="js/DOM.js"></script>
 </body>
 </html>
