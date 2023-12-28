@@ -5,9 +5,20 @@ document.getElementById('datosMineria').addEventListener('submit', function(even
     const gpuConsumo = Number(document.getElementById('gpuConsumo').value);
     const costoKWh = Number(document.getElementById('costoKWh').value);
 
+    // Guardo el costo de la luz en localStorage
+    localStorage.setItem('costoKWh', costoKWh);
+
     Algoritmo.actualizarPreciosGlobales(algoritmos);
     const resultados = ejecutarCalculos(gpuHashrate, gpuConsumo, costoKWh);
     mostrarResultadosEnDOM(resultados);
+});
+
+// Cuando se carga la página, verifica si hay un costo guardado y lo usa
+document.addEventListener('DOMContentLoaded', (event) => {
+    const costoGuardado = localStorage.getItem('costoKWh');
+    if (costoGuardado) {
+        document.getElementById('costoKWh').value = costoGuardado;
+    }
 });
 
 function ejecutarCalculos(gpuHashrate, gpuConsumo, costoKWh) {
