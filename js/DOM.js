@@ -29,45 +29,63 @@ document.addEventListener('DOMContentLoaded', (event) => {
 function ejecutarCalculos(gpuHashrate, gpuConsumo, costoKWh) {
     let resultados = [];
 
-    resultados.push('Por el momento solo soportamos ' + algoritmos.map(algo => algo.nombre).join("/"));
-    resultados.push('---------------------Datos del rig---------------------');
-    resultados.push('Mh/s: ' + gpuHashrate + ', Consumo: ' + gpuConsumo + 'W, Costo KWh: ' + costoKWh);
+resultados.push('<h2>Por el momento solo soportamos ' + algoritmos.map(algo => algo.nombre).join("/") + '</h2>');
 
-    resultados.push('---------------------Cotizacion---------------------');
-    resultados.push(algo2.rvnPrecio + ' RVN/USDT, ' + algo1.xnaPrecio + ' XNA/USDT, ' + algo3.neoxaPrecio + ' NEOXA/USDT');
+resultados.push('<div class="resultados-container">');
 
-    resultados.push('---------------------Hay que pagar la luz---------------------');
-    const costoDeLuz = costoEnergia(gpuConsumo, costoKWh);
-    resultados.push('Costo de luz: ' + costoDeLuz.toFixed(2) + ' u$d');
+resultados.push('<table class="mining-table">');
 
-    resultados.push('---------------------Crypto Diaria---------------------');
-    resultados.push(recompensaXna(gpuHashrate, algo1).toFixed(6) + ' XNA');
-    resultados.push(recompensaRvn(gpuHashrate, algo2).toFixed(6) + ' RVN');
-    resultados.push(recompensaNeoxa(gpuHashrate, algo3).toFixed(6) + ' NEOXA');
+// Datos del Rig
+resultados.push('<tr><th colspan="2"><h3>Datos del Rig</h3></th></tr>');
+resultados.push('<tr><td>Mh/s</td><td>' + gpuHashrate + '</td></tr>');
+resultados.push('<tr><td>Consumo</td><td>' + gpuConsumo + 'W</td></tr>');
+resultados.push('<tr><td>Costo KWh</td><td>' + costoKWh + '</td></tr>');
 
-    resultados.push('---------------------Ganancia diaria---------------------');
-    resultados.push('USD Diarios: ' + gananciaXna(gpuHashrate, gpuConsumo, costoKWh).toFixed(2) + ' XNA/USDT');
-    resultados.push('USD Diarios: ' + gananciaRvn(gpuHashrate, gpuConsumo, costoKWh).toFixed(2) + ' RVN/USDT');
-    resultados.push('USD Diarios: ' + gananciaNeoxa(gpuHashrate, gpuConsumo, costoKWh).toFixed(2) + ' NEOXA/USDT');
+// Cotizaciones
+resultados.push('<tr><th colspan="2"><h3>Cotizaciones</h3></th></tr>');
+resultados.push('<tr><td>RVN/USDT</td><td>' + algo2.rvnPrecio + '</td></tr>');
+resultados.push('<tr><td>XNA/USDT</td><td>' + algo1.xnaPrecio + '</td></tr>');
+resultados.push('<tr><td>NEOXA/USDT</td><td>' + algo3.neoxaPrecio + '</td></tr>');
 
-    resultados.push('---------------------Conclusion---------------------');
-    // con que alguna de ganancia, calcula que minar
-    const gananciaMaxima = Math.max(gananciaXna(gpuHashrate, gpuConsumo, costoKWh), gananciaRvn(gpuHashrate, gpuConsumo, costoKWh), gananciaNeoxa(gpuHashrate, gpuConsumo, costoKWh));
-    if (gananciaMaxima > 0) {
-        resultados.push('Prende los rigs!!!');
-        if (gananciaRvn(gpuHashrate, gpuConsumo, costoKWh) === gananciaMaxima) {
-            resultados.push('Mina RVN');
-        } else if (gananciaXna(gpuHashrate, gpuConsumo, costoKWh) === gananciaMaxima) {
-            resultados.push('Mina XNA');
-        } else {
-            resultados.push('Mina NEOXA');
-        }
-    // si todas dan perdida recomienda apagar
+// Costo de luz
+resultados.push('<tr><th colspan="2"><h3>Costo de luz</h3></th></tr>');
+const costoDeLuz = costoEnergia(gpuConsumo, costoKWh);
+resultados.push('<tr><td>Costo</td><td>' + costoDeLuz.toFixed(2) + ' u$d</td></tr>');
+
+// Crypto Diaria
+resultados.push('<tr><th colspan="2"><h3>Crypto Diaria</h3></th></tr>');
+resultados.push('<tr><td>XNA</td><td>' + recompensaXna(gpuHashrate, algo1).toFixed(6) + '</td></tr>');
+resultados.push('<tr><td>RVN</td><td>' + recompensaRvn(gpuHashrate, algo2).toFixed(6) + '</td></tr>');
+resultados.push('<tr><td>NEOXA</td><td>' + recompensaNeoxa(gpuHashrate, algo3).toFixed(6) + '</td></tr>');
+
+// Ganancia Diaria
+resultados.push('<tr><th colspan="2"><h3>Ganancia Diaria</h3></th></tr>');
+resultados.push('<tr><td>XNA</td><td>' + gananciaXna(gpuHashrate, gpuConsumo, costoKWh).toFixed(2) + ' XNA/USDT</td></tr>');
+resultados.push('<tr><td>RVN</td><td>' + gananciaRvn(gpuHashrate, gpuConsumo, costoKWh).toFixed(2) + ' RVN/USDT</td></tr>');
+resultados.push('<tr><td>NEOXA</td><td>' + gananciaNeoxa(gpuHashrate, gpuConsumo, costoKWh).toFixed(2) + ' NEOXA/USDT</td></tr>');
+
+// Conclusion
+resultados.push('<tr><th colspan="2"><h3>Conclusion</h3></th></tr>');
+const gananciaMaxima = Math.max(gananciaXna(gpuHashrate, gpuConsumo, costoKWh), gananciaRvn(gpuHashrate, gpuConsumo, costoKWh), gananciaNeoxa(gpuHashrate, gpuConsumo, costoKWh));
+if (gananciaMaxima > 0) {
+    resultados.push('<tr><td colspan="2">Prende los rigs!!!</td></tr>');
+    if (gananciaRvn(gpuHashrate, gpuConsumo, costoKWh) === gananciaMaxima) {
+        resultados.push('<tr><td colspan="2">Mina RVN</td></tr>');
+    } else if (gananciaXna(gpuHashrate, gpuConsumo, costoKWh) === gananciaMaxima) {
+        resultados.push('<tr><td colspan="2">Mina XNA</td></tr>');
     } else {
-        resultados.push('Apaga los rigs!!!');
-    }
+        resultados.push('<tr><td colspan="2">Mina NEOXA</td></tr>');
+}
+} else {
+    resultados.push('<tr><td colspan="2">Apaga los rigs!!!</td></tr>');
+}
 
-    return resultados;
+resultados.push('</table>');
+
+resultados.push('</div>');
+
+return resultados;
+
 }
 
 function mostrarResultadosEnDOM(resultados) {
