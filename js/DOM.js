@@ -148,6 +148,7 @@ function mostrarMensajeCalcular() {
         });
     } else {
         Swal.fire({
+            position: "top-end",
             icon: "error",
             title: "Oops...",
             text: "Algo salió mal!",
@@ -162,11 +163,18 @@ btnCalcular.addEventListener('click', () => {
 });
 
 btnBorrar.addEventListener('click', () => {
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Borrado!",
-            showConfirmButton: false,
-            timer: 1500
+    limpiarResultados();
+    
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Borrado!",
+        showConfirmButton: false,
+        timer: 1500
         });
 });
+
+function limpiarResultados() {
+    const resultadosDiv = document.getElementById('resultados');
+    resultadosDiv.innerHTML = '';
+}

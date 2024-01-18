@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mining-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.mining-form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.mining-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.mining-form input[type="submit"],
+.mining-form input[type="reset"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.mining-form input[type="submit"]:hover,
+.mining-form input[type="reset"]:hover {
+    background-color: #45a049;
+}
+
+.mining-results {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
