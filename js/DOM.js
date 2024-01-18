@@ -1,3 +1,5 @@
+let calculoRealizado = false;
+
 document.getElementById('datosMineria').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -11,6 +13,9 @@ document.getElementById('datosMineria').addEventListener('submit', function(even
     Algoritmo.actualizarPreciosGlobales(algoritmos);
     const resultados = ejecutarCalculos(gpuHashrate, gpuConsumo, costoKWh);
     mostrarResultadosEnDOM(resultados);
+
+    calculoRealizado = true;
+    mostrarMensajeCalcular();
 });
 
 // Cuando se carga la página, verifica si hay un costo guardado y lo usa
@@ -130,4 +135,38 @@ const algo2 = new Algoritmo('RVN', 69776, 2500, 5290000, 1440, 0.01, 0.4);
 const algo3 = new Algoritmo('NEOX', 8124, 2250, 581000, 1440, 0.0374, 0.05);
 
 const algoritmos = [algo1, algo2, algo3];
-const nombresAlgoritmos = ['RVN', 'XNA', 'NEOX', 'CLORE', 'NEURAI', 'SATOX'];
+const nombresAlgoritmos = ['RVN', 'XNA', 'NEOX', 'CLORE', 'NEURAI', 'SATOX'];   
+
+function mostrarMensajeCalcular() {
+    if (calculoRealizado) {
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Calculado!",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    } else {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo salió mal!",
+            footer: 'Datos incorrectos o incompletos'
+        });
+    }
+    calculoRealizado = false;
+}
+
+btnCalcular.addEventListener('click', () => {
+    mostrarMensajeCalcular();
+});
+
+btnBorrar.addEventListener('click', () => {
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Borrado!",
+            showConfirmButton: false,
+            timer: 1500
+        });
+});
