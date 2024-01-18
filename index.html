@@ -8,7 +8,20 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <script src="js/DOM.js" defer></script>
 </head>
+<header>
+
+    <div class="mode-buttons">
+        <button id="lightModeBtn" onclick="toggleMode('light')">
+            <img src="Assets/sun-solid.svg" alt="Light Mode" height="30px" width="30px">
+        </button>
+        <button id="darkModeBtn" onclick="toggleMode('dark')">
+            <img src="Assets/moon-solid.svg" alt="Dark Mode" height="30px" width="30px">
+        </button>
+    </div>
+
+</header>
 <body>
+
     <div class="container">
         <form id="datosMineria" class="mining-form">
             <label for="gpuHashrate">Cantidad de Mh/s:</label>
@@ -26,5 +39,6 @@
 
         <div id="resultados" class="mining-results"></div>
     </div>
+    
 </body>
 </html>

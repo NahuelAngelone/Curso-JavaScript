@@ -11,8 +11,11 @@ document.getElementById('datosMineria').addEventListener('submit', function(even
     localStorage.setItem('costoKWh', costoKWh);
 
     Algoritmo.actualizarPreciosGlobales(algoritmos);
+    
     const resultados = ejecutarCalculos(gpuHashrate, gpuConsumo, costoKWh);
     mostrarResultadosEnDOM(resultados);
+    const currentMode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    toggleMode(currentMode);
 
     calculoRealizado = true;
     mostrarMensajeCalcular();
@@ -174,6 +177,9 @@ function mostrarMensajeCalcular() {
         });
     }
     calculoRealizado = false;
+
+    const currentMode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    saveMode(currentMode);
 }
 
 btnCalcular.addEventListener('click', () => {
@@ -192,7 +198,65 @@ btnBorrar.addEventListener('click', () => {
         });
 });
 
+
 function limpiarResultados() {
     const resultadosDiv = document.getElementById('resultados');
     resultadosDiv.innerHTML = '';
 }
+
+//theme mode
+
+// Verifica el modo actual al cargar la página
+document.addEventListener('DOMContentLoaded', function () {
+    const savedMode = localStorage.getItem('mode');
+    if (savedMode) {
+        toggleMode(savedMode);
+    }
+});
+
+// Guarda el modo actual en localStorage
+function saveMode(mode) {
+    localStorage.setItem('mode', mode);
+}
+
+
+// evento de clic a los botones de cambio de modo
+const lightModeBtn = document.getElementById('lightModeBtn');
+const darkModeBtn = document.getElementById('darkModeBtn');
+
+if (lightModeBtn && darkModeBtn) {
+    lightModeBtn.addEventListener('click', function () {
+        toggleMode('light');
+    });
+
+    darkModeBtn.addEventListener('click', function () {
+        toggleMode('dark');
+    });
+}
+
+function toggleMode(mode) {
+    const body = document.body;
+    const container = document.querySelector('.container');
+    const miningForm = document.querySelector('.mining-form');
+    const miningResults = document.querySelector('.mining-results');
+    const miningTable = document.querySelector('.mining-table');
+
+    if (mode === 'light') {
+        body.classList.remove('dark-mode');
+        container.classList.remove('dark-mode');
+        miningForm.classList.remove('dark-mode');
+        miningResults.classList.remove('dark-mode');
+        miningTable.classList.remove('dark-mode');
+    } else {
+        body.classList.add('dark-mode');
+        container.classList.add('dark-mode');
+        miningForm.classList.add('dark-mode');
+        miningResults.classList.add('dark-mode');
+        miningTable.classList.add('dark-mode');
+    }
+
+    saveMode(mode);
+}
+
+
+

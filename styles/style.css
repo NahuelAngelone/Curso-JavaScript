@@ -1,14 +1,7 @@
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
+/* Estilos para el modo claro */
+body.light-mode {
+    background-color: #fff;
+    color: #333;
 }
 
 .container {
@@ -80,14 +73,14 @@ body {
 .resultados-container {
     width: 100%;
     overflow-x: auto;
-    margin-top: 10px; 
-    padding: 10px; 
+    margin-top: 10px;
+    padding: 10px;
 }
 
 .mining-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: -430px; 
+    margin-top: -430px;
 }
 
 .mining-table th, .mining-table td {
@@ -100,4 +93,65 @@ body {
     background-color: #f2f2f2;
 }
 
+/* Estilos para el modo oscuro */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #fff;
+}
 
+.container.dark-mode {
+    background-color: #2d2d2d;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); /* Ajusta la opacidad según sea necesario */
+}
+
+.mining-form.dark-mode {
+    border: 1px solid #444;
+}
+
+.mining-form.dark-mode label {
+    color: #ccc;
+}
+
+.mining-form.dark-mode input {
+    border: 1px solid #555;
+    background-color: #333;
+    color: #fff;
+}
+
+.mining-form.dark-mode input[type="submit"],
+.mining-form.dark-mode input[type="reset"] {
+    background-color: #1a1a1a;
+}
+
+.mining-results.dark-mode {
+    border: 1px solid #555;
+    background-color: #2d2d2d;
+}
+
+.mining-results.dark-mode h2 {
+    color: #fff;
+}
+
+.resultados-container.dark-mode {
+    border: 1px solid #555;
+}
+
+.mining-table.dark-mode {
+    border-collapse: collapse;
+    margin-top: 0;
+    margin-top: -430px; 
+}
+
+.mining-table.dark-mode th, .mining-table.dark-mode td {
+    border: 1px solid #555;
+    color: #fff;
+}
+
+.mining-table.dark-mode th {
+    background-color: #1a1a1a;
+}
+
+.mining-table.dark-mode tr {
+    background-color: #2d2d2d; 
+    color: #fff;
+}
