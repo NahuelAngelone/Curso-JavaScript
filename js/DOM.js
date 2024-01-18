@@ -258,5 +258,22 @@ function toggleMode(mode) {
     saveMode(mode);
 }
 
+// fetch
+
+fetch('https://api.minerstat.com/v2/coins?algo=KAWPOW')
+  .then(response => response.json())
+  .then(data => {
+    data.forEach(coin => {
+        const coinName = coin.name;
+        const coinPrice = coin.price;
+        const coinNetworkHashrate = coin.network_hashrate;
+        const coinDifficulty = coin.difficulty;
+        const coinRewardBlock = coin.reward_block;
+  
+        console.log(`Nombre: ${coinName}, Precio: ${coinPrice}, Hashrate de Red: ${coinNetworkHashrate}, Dificultad: ${coinDifficulty}, Recompensa por Bloque: ${coinRewardBlock}`);
+      });
+  })
+  .catch(error => console.error('Error:', error));
+
 
 
