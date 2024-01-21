@@ -237,6 +237,8 @@ let calculoRealizado = false;
 
 let algoritmos;
 
+//fetch 
+
 fetch('https://api.minerstat.com/v2/coins?algo=KAWPOW')
   .then(response => response.json())
   .then(data => {
@@ -318,7 +320,7 @@ fetch('https://api.minerstat.com/v2/coins?algo=KAWPOW')
       const gpuConsumo = Number(document.getElementById('gpuConsumo').value);
       const costoKWh = Number(document.getElementById('costoKWh').value);
 
-      // Store the cost of electricity in local storage
+      // Costo de electricidad en local storage
       localStorage.setItem('costoKWh', costoKWh);
 
       const resultados = ejecutarCalculos(gpuHashrate, gpuConsumo, costoKWh);
@@ -332,4 +334,11 @@ fetch('https://api.minerstat.com/v2/coins?algo=KAWPOW')
     });
 
   })
-  .catch(error => console.error('Error:', error));
+  .catch(error => {
+    console.error('Error:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Error en la solicitud',
+      text: 'Hubo un problema al obtener los datos. Por favor, intenta nuevamente más tarde.',
+    });
+  });
