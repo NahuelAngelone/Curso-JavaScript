@@ -101,7 +101,7 @@ body.dark-mode {
 
 .container.dark-mode {
     background-color: #2d2d2d;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); /* Ajusta la opacidad según sea necesario */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); 
 }
 
 .mining-form.dark-mode {
